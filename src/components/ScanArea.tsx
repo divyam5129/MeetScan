@@ -11,7 +11,7 @@ import tiktokIcon from '../icons/tiktok.svg';
 import wikipediaIcon from '../icons/wikipedia.svg'
 import xyzIcon from '../icons/xyz.svg';
 import amazonIcon from '../icons/amazon.svg';
-
+import facebook from '../icons/facebook.svg';
 
 interface ScanAreaProps {
   onSave: (scan: any) => void;
@@ -24,7 +24,7 @@ const ScanArea: React.FC<ScanAreaProps> = ({ onSave }) => {
   const [notes, setNotes] = useState('');
   const [showScanner, setShowScanner] = useState(true); // Active scanner by default
   const [qrCodeImage, setQrCodeImage] = useState<string | null>(null);
-  const [linkType, setLinkType] = useState<'linkedin' | 'bitly' | 'netflix' |'instagram' | 'tiktok' | 'website' | 'wikipedia' | 'xyz' | 'amazon' | 'unknown'>('unknown'); // Type of link detected
+  const [linkType, setLinkType] = useState<'linkedin' | 'bitly' | 'netflix' |'instagram' | 'tiktok' | 'website' | 'facebook' | 'wikipedia' | 'xyz' | 'amazon' | 'unknown'>('unknown'); // Type of link detected
 
   useEffect(() => {
     const savedQrCode = localStorage.getItem('qrCode');
@@ -59,6 +59,8 @@ const ScanArea: React.FC<ScanAreaProps> = ({ onSave }) => {
       setLinkType('tiktok');
     } else if (/wikipedia\.com/.test(url)) {
       setLinkType('wikipedia');
+    }else if (/facebook\.com/.test(url)) {
+      setLinkType('facebook');
     }
         else if (/netflix\.com/.test(url)) {
       setLinkType('netflix');
@@ -109,6 +111,8 @@ const ScanArea: React.FC<ScanAreaProps> = ({ onSave }) => {
         return <img src={xyzIcon} alt="xyz" className="h-6 w-6" />;
       case 'amazon':
         return <img src={amazonIcon} alt="Amazon" className="h-6 w-6" />;
+      case 'facebook':
+        return <img src={facebookIcon} alt="Facebook" className="h-6 w-6" />;
       default:
         return <p>URL</p>;
     }
